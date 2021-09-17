@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'forms.dart';
+import 'language.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 
@@ -28,6 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text("TQW Covid Form"),
           backgroundColor: Colors.amber,
+          actions: <Widget> [
+            IconButton(
+              icon:  const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Language()) );
+              }
+            )
+          ],
         ),
         body: Padding(
           

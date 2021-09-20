@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 // Define a custom Form widget.
@@ -38,7 +41,7 @@ class GuestFormsState extends State<GuestForms> {
             child: ElevatedButton(
               style: ButtonStyle(
                   backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.amber)),
+                      MaterialStateProperty.all<Color>(Colors.amber)),
               onPressed: () {
 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
@@ -59,4 +62,27 @@ class GuestFormsState extends State<GuestForms> {
     );
   }
 }
+class FaB extends StatefulWidget {
+  const FaB({Key? key}) : super(key: key);
 
+  @override
+  FaBState createState() {
+    return FaBState();
+  }
+}
+
+class FaBState extends State<FaB> {
+  int _counter = 0;
+  late DatabaseReference _counterRef;
+  late DatabaseReference _messagesRef;
+  late StreamSubscription<Event> _counterSubscription;
+  late StreamSubscription<Event> _messagesSubscription;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+
+
+}

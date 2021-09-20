@@ -1,83 +1,66 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'forms.dart';
 import 'home.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:async';
+//import 'package:firebase_database/firebase_database.dart';
 
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const App());
+}
 
- void main(){
-   WidgetsFlutterBinding.ensureInitialized();
-   runApp(App());
- }
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
 
- class App extends StatefulWidget {
-   _AppState createState() => _AppState();
- }
+  @override
+  _AppState createState() => _AppState();
+}
 
- class _AppState extends State<App> {
-   // Set default `_initialized` and `_error` state to false
-   bool _initialized = false;
-   bool _error = false;
-   Future<void> initializeDefault() async {
-     FirebaseApp app = await Firebase.initializeApp();
-     assert(app != null);
-     print('Initialized default app $app');
-   }
+class _AppState extends State<App> {
+  // Set default `_initialized` and `_error` state to false
+  bool _initialized = false;
+  bool _error = false;
+  Future<void> initializeDefault() async {
+    FirebaseApp app = await Firebase.initializeApp();
+    assert(app != null);
+    print('Initialized default app $app');
+  }
 
-   @override
-   void initState() {
-     initializeFlutterFire();
-     super.initState();
-   }
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
 
-   void initializeFlutterFire() async {
-     try {
-       // Wait for Firebase to initialize and set `_initialized` state to true
-       await Firebase.initializeApp();
-       setState(() {
-         _initialized = true;
-       });
-     } catch(e) {
-       // Set `_error` state to true if Firebase initialization fails
-       setState(() {
-         _error = true;
-       });
-     }
-   }
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
 
-   @override
-   Widget build(BuildContext context) {
-     if(_initialized) {
-       FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: 'T3q2w1Wien');
-     }
+  @override
+  Widget build(BuildContext context) {
+    if (_error) {
+      print("error establishing connection");
+      return const Text("fuck");
+    }
 
-     return MaterialApp(
-       home: Scaffold(
-         appBar: AppBar(
-           title: const Text('Firebase Core example app'),
-         ),
-         body: Padding(
-           padding: const EdgeInsets.all(20),
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.spaceAround,
-             crossAxisAlignment: CrossAxisAlignment.stretch,
-             children: <Widget>[
-               ElevatedButton(
-                   onPressed: initializeDefault,
-                   child: const Text('Initialize default app')),
-             ],
-           ),
-         ),
-       ),
-     );
-   }
- }
-
-
-
-
+    //    FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '44f2dace-e0b0-41cf-b3c3-fec89fb90f5e');
+    return const MaterialApp(home: HomeScreen());
+  }
+}
 
 /*
 Future<void> main() async {
@@ -131,4 +114,3 @@ class TQW extends StatelessWidget{
   }
 }
 */
-

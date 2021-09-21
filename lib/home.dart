@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'forms.dart';
+import 'get_guest_data.dart';
 import 'language.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Language()));
+                          builder: (context) => GetGuestData()));
                 })
           ],
         ),

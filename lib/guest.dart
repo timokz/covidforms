@@ -12,20 +12,17 @@ class Guest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference guests = FirebaseFirestore.instance.collection('guests');
+    CollectionReference guests = FirebaseFirestore.instance.collection('guests_testing');
 
     Future<void> addGuest() {
       return guests
           .add({
-        'location' : "Testort",
         'n_name': n_name,
-        'tel' : "test telnr",
         'v_name' : v_name
       })
           .then((value) => print("Guest Added"))
           .catchError((error) => print("Failed to add Guest: $error"));
     }
-
     return TextButton(
       onPressed: addGuest,
       child: Text(

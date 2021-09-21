@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -47,23 +46,46 @@ class _FaBState extends State<FaB> {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(hintText: "Enter Title"),
-                onSaved: (value) {
-                  title = value!;
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Guest("testvor", "testname"),
+              NameForm()
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class NameForm extends StatelessWidget {
+  String v_name = "";
+  String n_name = "";
+
+  NameForm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      const SizedBox(
+        height: 10,
+      ),
+      TextFormField(
+        decoration: const InputDecoration(hintText: "Vorname"),
+        onSaved: (value) {
+          v_name = value!;
+        },
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      TextFormField(
+        decoration: const InputDecoration(hintText: "Nachname"),
+        onSaved: (value) {
+          n_name = value!;
+        },
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      Guest(v_name, n_name),
+    ]);
   }
 }

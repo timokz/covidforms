@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Center(child: GuestForms()),
+              Center(child: FaB()),
             ],
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.

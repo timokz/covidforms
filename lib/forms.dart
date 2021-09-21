@@ -1,88 +1,69 @@
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-// Define a custom Form widget.
-class GuestForms extends StatefulWidget {
-  const GuestForms({Key? key}) : super(key: key);
+import 'guest.dart';
 
-  @override
-  GuestFormsState createState() {
-    return GuestFormsState();
-  }
-}
-
-// Define a corresponding State class.
-// This class holds data related to the form.
-class GuestFormsState extends State<GuestForms> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Empty Form Field";
-            }
-            return null;
-          }),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.amber)),
-              onPressed: () {
-// Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-// If the form is valid, display a snackbar. In the real world,
-// you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
-                }
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-
-// Add TextFormFields and ElevatedButton here.
-        ],
-      ),
-    );
-  }
-}
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
 
   @override
-  FaBState createState() {
-    return FaBState();
+  _FaBState createState() {
+    return _FaBState();
   }
 }
 
-class FaBState extends State<FaB> {
-  int _counter = 0;
-  late DatabaseReference _counterRef;
-  late DatabaseReference _messagesRef;
-  late StreamSubscription<Event> _counterSubscription;
-  late StreamSubscription<Event> _messagesSubscription;
+class _FaBState extends State<FaB> {
+  final _form = GlobalKey<FormState>();
+  String title = "";
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  void writeData() async {
+    _form.currentState!.save();
+
+    var url =
+        "https://tqwcovidreg-default-rtdb.europe-west1.firebasedatabase.app/" +
+            "data.json";
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: json.encode({"title": title}),
+      );
+      print(response);
+    } catch (error) {
+      rethrow;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Center(
+      child: Form(
+        key: _form,
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(hintText: "Enter Title"),
+                onSaved: (value) {
+                  title = value!;
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Guest("testvor", "testname"),
+            ],
+          ),
+        ),
+      ),
+    );
   }
-
-
 }

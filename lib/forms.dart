@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'location_dropdown.dart';
 import 'guest.dart';
 
 class FaB extends StatefulWidget {
@@ -26,7 +26,6 @@ class _FaBState extends State<FaB> {
     var url =
         "https://tqwcovidreg-default-rtdb.europe-west1.firebasedatabase.app/" +
             "data.json";
-
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -45,9 +44,7 @@ class _FaBState extends State<FaB> {
         key: _form,
         child: Center(
           child: Column(
-            children: [
-              NameForm()
-            ],
+            children: [NameForm()],
           ),
         ),
       ),
@@ -55,11 +52,27 @@ class _FaBState extends State<FaB> {
   }
 }
 
-class NameForm extends StatelessWidget {
+class NameForm extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _NameFormState();
+}
+
+class _NameFormState extends State<NameForm> {
   String v_name = "";
   String n_name = "";
+  final vController = TextEditingController();
+  final nController = TextEditingController();
+  @override
+  void dispose() {
+    vController.dispose();
+    nController.dispose();
+    super.dispose();
+  }
 
-  NameForm({Key? key}) : super(key: key);
+  void helper() {
+    print("v_name: " + v_name);
+    print("n_name: " + n_name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,25 +80,25 @@ class NameForm extends StatelessWidget {
       const SizedBox(
         height: 10,
       ),
-      TextFormField(
+      TextField(
         decoration: const InputDecoration(hintText: "Vorname"),
-        onSaved: (value) {
-          v_name = value!;
-        },
+        controller: vController,
       ),
       const SizedBox(
         height: 10,
       ),
-      TextFormField(
+      TextField(
         decoration: const InputDecoration(hintText: "Nachname"),
-        onSaved: (value) {
-          n_name = value!;
-        },
+        controller: nController,
       ),
       const SizedBox(
         height: 10,
       ),
-      Guest(v_name, n_name),
+      Guest(vController.text, nController.text),
+      const SizedBox(
+        height: 10,
+      ),
+      const LocationDropdown(),
     ]);
   }
 }

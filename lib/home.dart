@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const <Widget>[
               Center(child: Image(image: AssetImage('graphics/tqwlogo.jfif'),)),
               Center(child: FaB()),
+          //    Center(child:),
             ],
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.

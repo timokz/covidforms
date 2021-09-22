@@ -60,7 +60,12 @@ class _AppState extends State<App> {
     //    FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '44f2dace-e0b0-41cf-b3c3-fec89fb90f5e');
     return MaterialApp(
         title: 'tqwcovidreg',
-        theme: ThemeData.dark(),
+        theme: ThemeData(
+
+          primaryColor: Colors.black,
+          backgroundColor: Color(0xffffffff),
+
+        ),
         home: const HomeScreen());
   }
 }

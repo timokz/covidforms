@@ -27,7 +27,7 @@ class GetGuestData extends StatelessWidget {
               itemCount: doclist.length,
               padding: const EdgeInsets.all(8),
               itemBuilder: (BuildContext context, int index) {
-                return Container(
+                return SizedBox(
                   height: 50,
                   child: Center(child: Text(doclist[index])),
                 );

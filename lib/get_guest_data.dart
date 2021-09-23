@@ -1,11 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class GetGuestData extends StatelessWidget {
+class GetGuestData extends StatefulWidget {
+  const GetGuestData({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _GetGuestDataState();
+}
+
+class _GetGuestDataState extends State<GetGuestData>{
+
   @override
   Widget build(BuildContext context) {
     CollectionReference users =
-        FirebaseFirestore.instance.collection('guests_testing');
+    FirebaseFirestore.instance.collection('guests_testing');
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc().get(),
@@ -22,14 +30,20 @@ class GetGuestData extends StatelessWidget {
           }
         });
         return Column(children: [
-
+          Text("testing displaying guest data" + doclist.length.toString()),
+          if (doclist.isNotEmpty)
+             Text("passt"),
+          if (doclist.isEmpty)
+            Text("ned gut "),
           ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: doclist.length,
               padding: const EdgeInsets.all(8),
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
                   height: 50,
-                  child: Center(child: Text(doclist[index])),
+                  child: Center(child: Text(' Entry ${doclist[index]}')),
                 );
               })
         ]);
@@ -37,33 +51,3 @@ class GetGuestData extends StatelessWidget {
     );
   }
 }
-/*
-class _GuestItem extends StatelessWidget{
-
-  final String documentId;
-
-  _GuestItem(this.documentId);
-
-  Widget get data {
-    return SizedBox(
-      width: 100,
-      child: Center(
-        child: I
-      ),
-    );
-
-}
-
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference guests = FirebaseFirestore.instance.collection('guests_testing');
-
-    return FutureBuilder<DocumentSnapshot>(
-      future: guests.doc(documentId).get(),
-        builder:
-        (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
-        }
-    )
-
-  } */

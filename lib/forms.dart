@@ -94,11 +94,17 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
-      Guest(vController.text, nController.text),
+      LocationDropdown(),
       const SizedBox(
         height: 10,
       ),
-      const LocationDropdown(),
+      TextButton(
+        onPressed: () =>  {Guest(vController.text, nController.text),
+    },
+        child: const Text(
+          "Add Guest",
+        ),
+      ),
     ]);
   }
 }

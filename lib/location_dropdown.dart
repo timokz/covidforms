@@ -21,10 +21,11 @@ class _LocationDropdownState extends State<LocationDropdown> {
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
+      borderRadius: BorderRadius.vertical(),
+      style: const TextStyle(color: Colors.grey),
       underline: Container(
         height: 2,
-        color: Colors.deepPurpleAccent,
+        color: Colors.grey,
       ),
       onChanged: (String? newValue) {
         setState(() {

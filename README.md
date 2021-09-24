@@ -16,7 +16,9 @@ Covid Registration webapp for guests at a Viennese cultural institution.
 
 22.09 10:30-13:00 16:00-18:00 21:00-00:30
 
-23.09 16:00-21:30 23:00- 
+23.09 16:00-21:30 23:00- 01:30
+
+24.09 11:00-15:00 
 
 | Tag  | h  |
 |---|---|
@@ -25,7 +27,7 @@ Covid Registration webapp for guests at a Viennese cultural institution.
 | 18.09  | 2  |
 | 20.09  | 9  |
 | 21.09  |  9 |
-| 22.09 |   |
+| 22.09 |  8 |
 
 TODO:
 

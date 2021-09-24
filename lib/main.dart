@@ -64,7 +64,7 @@ class _AppState extends State<App> {
 
           primaryColor: Colors.black,
           backgroundColor: const Color(0xffffffff),
-          fontFamily: 'arial',
+          fontFamily: 'freya-medium',
 
 
         ),

@@ -81,6 +81,7 @@ class _NameFormState extends State<NameForm> {
         height: 10,
       ),
       TextField(
+        style: TextStyle(fontFamily: 'freya-medium'),
         decoration: const InputDecoration(hintText: "Vorname"),
         controller: vController,
       ),
@@ -103,6 +104,7 @@ class _NameFormState extends State<NameForm> {
     },
         child: const Text(
           "Add Guest",
+          style: TextStyle(fontFamily: 'freya-medium'),
         ),
       ),
     ]);

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Guest extends StatelessWidget {
+class Guest  {
   final String v_name;
   final String n_name;
   CollectionReference guests =
@@ -17,9 +17,4 @@ class Guest extends StatelessWidget {
         .catchError((error) => print("Failed to add Guest: $error"));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return const SnackBar(
-        content: Text("Successfully registered Guest. Thank you!"));
-  }
 }

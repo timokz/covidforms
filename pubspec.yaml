@@ -47,6 +47,8 @@ flutter:
     - family: Freya
       fonts:
         - asset: fonts/freya-medium.ttf
+        - asset: fonts/freya-bold.ttf
+          style: normal
 
   assets:
     - graphics/

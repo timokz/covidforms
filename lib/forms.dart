@@ -20,6 +20,7 @@ class _FaBState extends State<FaB> {
   String title = "";
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+
   void writeData() async {
     _form.currentState!.save();
 
@@ -62,16 +63,14 @@ class _NameFormState extends State<NameForm> {
   String n_name = "";
   final vController = TextEditingController();
   final nController = TextEditingController();
+  CollectionReference guests =
+  FirebaseFirestore.instance.collection('guests_testing');
+
   @override
   void dispose() {
     vController.dispose();
     nController.dispose();
     super.dispose();
-  }
-
-  void helper() {
-    print("v_name: " + v_name);
-    print("n_name: " + n_name);
   }
 
   @override
@@ -81,7 +80,7 @@ class _NameFormState extends State<NameForm> {
         height: 10,
       ),
       TextField(
-        style: TextStyle(fontFamily: 'freya-medium'),
+        style: TextStyle(fontFamily: 'Arial'),
         decoration: const InputDecoration(hintText: "Vorname"),
         controller: vController,
       ),
@@ -104,7 +103,7 @@ class _NameFormState extends State<NameForm> {
     },
         child: const Text(
           "Add Guest",
-          style: TextStyle(fontFamily: 'freya-medium'),
+          style: TextStyle(fontFamily: 'Arial'),
         ),
       ),
     ]);

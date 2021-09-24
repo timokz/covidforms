@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: const Color(0xffffffff),
         appBar: AppBar(
           title: const Text("TQW Covid Form"),
           backgroundColor: Colors.black,
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => GetGuestData()));
+                          builder: (context) => const GetGuestData()));
                 })
           ],
         ),

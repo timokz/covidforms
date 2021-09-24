@@ -21,8 +21,12 @@ class _LocationDropdownState extends State<LocationDropdown> {
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      borderRadius: BorderRadius.vertical(),
-      style: const TextStyle(color: Colors.grey),
+      borderRadius: const BorderRadius.vertical(),
+      isExpanded: true,
+      style: const TextStyle(
+          color: Colors.grey,
+        fontSize: 14,
+      ),
       underline: Container(
         height: 2,
         color: Colors.grey,

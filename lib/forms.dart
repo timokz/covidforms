@@ -20,7 +20,6 @@ class _FaBState extends State<FaB> {
   String title = "";
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-
   void writeData() async {
     _form.currentState!.save();
 
@@ -64,7 +63,7 @@ class _NameFormState extends State<NameForm> {
   final vController = TextEditingController();
   final nController = TextEditingController();
   CollectionReference guests =
-  FirebaseFirestore.instance.collection('guests_testing');
+      FirebaseFirestore.instance.collection('guests_testing');
 
   @override
   void dispose() {
@@ -80,15 +79,21 @@ class _NameFormState extends State<NameForm> {
         height: 10,
       ),
       TextField(
-        style: TextStyle(fontFamily: 'Arial'),
-        decoration: const InputDecoration(hintText: "Vorname"),
+        style: const TextStyle(
+          fontFamily: 'Arial',
+        ),
+        decoration: const InputDecoration(
+          hintText: "Vorname",
+          prefixIcon: Icon(Icons.person),
+        ),
         controller: vController,
       ),
       const SizedBox(
         height: 10,
       ),
       TextField(
-        decoration: const InputDecoration(hintText: "Nachname"),
+        decoration: const InputDecoration(
+            hintText: "Nachname", prefixIcon: Icon(Icons.person)),
         controller: nController,
       ),
       const SizedBox(
@@ -98,9 +103,19 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
+      const TextField(
+          style: TextStyle(fontFamily: 'Arial'),
+          decoration: InputDecoration(
+            hintText: "Email",
+            prefixIcon: Icon(Icons.mail),
+          )),
+      const SizedBox(
+        height: 10,
+      ),
       TextButton(
-        onPressed: () =>  {Guest(vController.text, nController.text),
-    },
+        onPressed: () => {
+          Guest(vController.text, nController.text),
+        },
         child: const Text(
           "Add Guest",
           style: TextStyle(fontFamily: 'Arial'),

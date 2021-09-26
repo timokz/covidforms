@@ -13,7 +13,7 @@ class LocationDropdown extends StatefulWidget {
 
 class _LocationDropdownState extends State<LocationDropdown> {
   String dropdownValue = 'Studio 1';
-
+/*
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
@@ -24,8 +24,8 @@ class _LocationDropdownState extends State<LocationDropdown> {
       borderRadius: const BorderRadius.vertical(),
       isExpanded: true,
       style: const TextStyle(
-          color: Colors.grey,
-        fontSize: 14,
+        color: Colors.grey,
+        fontSize: 16,
       ),
       underline: Container(
         height: 2,
@@ -44,5 +44,30 @@ class _LocationDropdownState extends State<LocationDropdown> {
         );
       }).toList(),
     );
+  } */
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<String>(
+      style: const TextStyle(
+        color: Colors.grey,
+        fontSize: 16,
+      ),
+      decoration: const InputDecoration(
+        prefixIcon: Icon(Icons.location_pin),
+        hintText: "Location",
+      ),
+      items:  <String>['Studio 1', 'Studio 2', 'Bibliothek', 'Office']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          dropdownValue = newValue!;
+        });
+      },
+      );
   }
 }

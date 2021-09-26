@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
+        backgroundColor: const Color(0xffffffff),
         appBar: AppBar(
           title: const Text("TQW Covid Form"),
           backgroundColor: Colors.black,
@@ -35,9 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Center(child: Image(image: AssetImage('graphics/tqwlogo.jfif'),)),
+              Center(
+                  child: Image(
+                image: AssetImage('graphics/tqwlogo.jfif'),
+              )),
               Center(child: FaB()),
-          //    Center(child:),
+              //    Center(child:),
             ],
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.

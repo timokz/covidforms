@@ -5,7 +5,6 @@ import 'forms.dart';
 import 'home.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:async';
-//import 'package:firebase_database/firebase_database.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,17 +55,14 @@ class _AppState extends State<App> {
       print("error establishing connection");
       return const Text("fuck");
     }
-
-    //    FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '44f2dace-e0b0-41cf-b3c3-fec89fb90f5e');
+    //TODO AppCheck
+    // FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '44f2dace-e0b0-41cf-b3c3-fec89fb90f5e');
     return MaterialApp(
         title: 'tqwcovidreg',
         theme: ThemeData(
-
           primaryColor: Colors.black,
           backgroundColor: const Color(0xffffffff),
-      //    fontFamily: 'Freya',
-
-
+          //    fontFamily: 'Freya',
         ),
         home: const HomeScreen());
   }

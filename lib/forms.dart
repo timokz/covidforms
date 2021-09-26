@@ -115,6 +115,10 @@ class _NameFormState extends State<NameForm> {
       TextButton(
         onPressed: () => {
           Guest(vController.text, nController.text),
+          const AlertDialog(
+            title: Text("Registered succesfully"),
+            content: Text("Placeholder") ,
+          )
         },
         child: const Text(
           "Add Guest",

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Guest  {
+class Guest {
   final String v_name;
   final String n_name;
   CollectionReference guests =
@@ -16,5 +16,4 @@ class Guest  {
         .then((value) => print("Guest Added"))
         .catchError((error) => print("Failed to add Guest: $error"));
   }
-
 }

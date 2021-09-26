@@ -56,7 +56,7 @@ class _LocationDropdownState extends State<LocationDropdown> {
         prefixIcon: Icon(Icons.location_pin),
         hintText: "Location",
       ),
-      items:  <String>['Studio 1', 'Studio 2', 'Bibliothek', 'Office']
+      items: <String>['Studio 1', 'Studio 2', 'Bibliothek', 'Office']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -68,6 +68,6 @@ class _LocationDropdownState extends State<LocationDropdown> {
           dropdownValue = newValue!;
         });
       },
-      );
+    );
   }
 }

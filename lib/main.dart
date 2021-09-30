@@ -62,7 +62,7 @@ class _AppState extends State<App> {
         theme: ThemeData(
           primaryColor: Colors.black,
           backgroundColor: const Color(0xffffffff),
-          //    fontFamily: 'Freya',
+             fontFamily: 'Roboto',
         ),
         home: const HomeScreen());
   }

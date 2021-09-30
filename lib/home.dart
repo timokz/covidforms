@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'forms.dart';
 import 'get_guest_data.dart';
+import 'imprint.dart';
 import 'language.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -14,10 +17,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    const _url = 'https://tqw.at';
+    void _launchURL() async => await canLaunch(_url)
+        ? await launch(_url)
+        : throw 'Could not connect to $_url';
     return Scaffold(
         backgroundColor: const Color(0xffffffff),
         appBar: AppBar(
-          title: const Text("TQW Covid Form"),
+          title: TextButton(
+              style: const ButtonStyle(),
+              onPressed: _launchURL,
+              child: const Text(
+                "TQW Covid Form",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Roboto",
+                  fontStyle: FontStyle.italic,
+                ),
+              )),
           backgroundColor: Colors.black,
           actions: <Widget>[
             IconButton(
@@ -40,6 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetImage('graphics/tqwlogo.jfif'),
               )),
               Center(child: FaB()),
+              Center(
+                child:
+                    Align(alignment: Alignment.bottomCenter, child: Imprint()),
+              )
+              //imprint
               //    Center(child:),
             ],
           ),

@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'location_dropdown.dart';
 import 'guest.dart';
@@ -62,6 +64,7 @@ class _NameFormState extends State<NameForm> {
   String n_name = "";
   final vController = TextEditingController();
   final nController = TextEditingController();
+  final pController = TextEditingController();
   CollectionReference guests =
       FirebaseFirestore.instance.collection('guests_testing');
 
@@ -112,19 +115,55 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
-      TextButton(
+      TextFormField(
+          decoration: const InputDecoration(
+              labelText: 'Telefon*',
+              hintText: "+43 660 3111499",
+              prefixIcon: Icon(Icons.phone)),
+          keyboardType: TextInputType.phone,
+          validator: (String? value) {
+            String sanitizedVal = value!.trim();
+            if (sanitizedVal.isEmpty) {
+              return 'Email is required';
+            }
+            return null;
+          },
+          onChanged: (String str) {
+            setState(() {});
+          }),
+      const SizedBox(
+        height: 10,
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(80.0)),
+          primary: Colors.black,
+          shadowColor: Colors.white,
+          elevation: 5,
+          minimumSize: (const Size(150, 50)),
+          enableFeedback: true,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         onPressed: () => {
-          Guest(vController.text, nController.text),
-          const AlertDialog(
-            title: Text("Registered succesfully"),
-            content: Text("Placeholder") ,
-          )
+          if (vController.text.isNotEmpty && nController.text.isNotEmpty)
+            {
+              Guest(vController.text, nController.text),
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Processing Data'))),
+            }
+          else{
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Please enter valid Data ')))
+          }
         },
         child: const Text(
-          "Add Guest",
+          "Register",
           style: TextStyle(fontFamily: 'Arial'),
         ),
-      ),
+      )
     ]);
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'location_dropdown.dart';
 import 'guest.dart';
+import 'email_form.dart';
 
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
@@ -62,6 +63,7 @@ class NameForm extends StatefulWidget {
 class _NameFormState extends State<NameForm> {
   String v_name = "";
   String n_name = "";
+  String guestEmail = "";
   final vController = TextEditingController();
   final nController = TextEditingController();
   final pController = TextEditingController();
@@ -78,6 +80,7 @@ class _NameFormState extends State<NameForm> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      //actually have to wrap this in Shortcuts() Widget
       const SizedBox(
         height: 10,
       ),
@@ -86,7 +89,7 @@ class _NameFormState extends State<NameForm> {
           fontFamily: 'Arial',
         ),
         decoration: const InputDecoration(
-          hintText: "Vorname",
+          hintText: "First name",
           prefixIcon: Icon(Icons.person),
         ),
         controller: vController,
@@ -96,7 +99,7 @@ class _NameFormState extends State<NameForm> {
       ),
       TextField(
         decoration: const InputDecoration(
-            hintText: "Nachname", prefixIcon: Icon(Icons.person)),
+            hintText: "Last name", prefixIcon: Icon(Icons.person)),
         controller: nController,
       ),
       const SizedBox(
@@ -106,25 +109,24 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
-      const TextField(
-          style: TextStyle(fontFamily: 'Arial'),
-          decoration: InputDecoration(
-            hintText: "Email",
-            prefixIcon: Icon(Icons.mail),
-          )),
+      EmailForm(
+        onEmailChanged: (newEmail) {
+          guestEmail = newEmail;
+        },
+      ),
       const SizedBox(
         height: 10,
       ),
       TextFormField(
           decoration: const InputDecoration(
-              labelText: 'Telefon*',
+              labelText: 'Telephone*',
               hintText: "+43 660 3111499",
               prefixIcon: Icon(Icons.phone)),
           keyboardType: TextInputType.phone,
           validator: (String? value) {
             String sanitizedVal = value!.trim();
             if (sanitizedVal.isEmpty) {
-              return 'Email is required';
+              return 'Value required';
             }
             return null;
           },
@@ -136,8 +138,8 @@ class _NameFormState extends State<NameForm> {
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(80.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
           primary: Colors.black,
           shadowColor: Colors.white,
           elevation: 5,
@@ -154,10 +156,11 @@ class _NameFormState extends State<NameForm> {
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Processing Data'))),
             }
-          else{
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Please enter valid Data ')))
-          }
+          else
+            {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Please enter valid Data ')))
+            }
         },
         child: const Text(
           "Register",

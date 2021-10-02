@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class EmailForm extends StatefulWidget {
   final ValueChanged<String> onEmailChanged;
@@ -22,7 +23,8 @@ class _EmailFormState extends State<EmailForm> {
       child: Form(
         child: TextFormField(
             validator: (String? value) {
-              return (value != null && !value.contains('@') && value.isNotEmpty)
+              final bool isValid = EmailValidator.validate(value!);
+              return (!value.contains('@') && value.isNotEmpty && !isValid)
                   ? 'Incorrect format.'
                   : null;
             },

@@ -27,8 +27,8 @@ class _FaBState extends State<FaB> {
     _form.currentState!.save();
 
     var url =
-        "https://tqwcovidreg-default-rtdb.europe-west1.firebasedatabase.app/" +
-            "data.json";
+        "https://tqwcovidreg-default-rtdb.europe-west1.firebasedatabase.app/"
+        "data.json";
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -47,7 +47,7 @@ class _FaBState extends State<FaB> {
         key: _form,
         child: Center(
           child: Column(
-            children: [NameForm()],
+            children: const [NameForm()],
           ),
         ),
       ),
@@ -56,6 +56,8 @@ class _FaBState extends State<FaB> {
 }
 
 class NameForm extends StatefulWidget {
+  const NameForm({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _NameFormState();
 }
@@ -64,6 +66,7 @@ class _NameFormState extends State<NameForm> {
   String v_name = "";
   String n_name = "";
   String guestEmail = "";
+  String guestLocation = "";
   final vController = TextEditingController();
   final nController = TextEditingController();
   final pController = TextEditingController();
@@ -80,7 +83,7 @@ class _NameFormState extends State<NameForm> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      //actually have to wrap this in Shortcuts() Widget
+      //TODO actually have to wrap this in Shortcuts() Widget
       const SizedBox(
         height: 10,
       ),
@@ -105,7 +108,11 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
-      LocationDropdown(),
+      LocationDropdown(
+        onChanged: (newLocation) {
+          guestLocation = newLocation;
+        },
+      ),
       const SizedBox(
         height: 10,
       ),
@@ -152,7 +159,8 @@ class _NameFormState extends State<NameForm> {
         onPressed: () => {
           if (vController.text.isNotEmpty && nController.text.isNotEmpty)
             {
-              Guest(vController.text, nController.text),
+              Guest(vController.text, nController.text, guestEmail,
+                  guestLocation),
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Processing Data'))),
             }

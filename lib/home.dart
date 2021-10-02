@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'forms.dart';
 import 'get_guest_data.dart';
@@ -51,13 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(64.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               Center(
-                  child: Image(
-                image: AssetImage('graphics/tqwlogo.jfif'),
-              )),
-              Center(child: FaB()),
-              Center(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                      onTap: _launchURL, // handle your image tap here
+                      child: const Image(
+                        image: AssetImage('graphics/tqwlogo.jfif'),
+                      ))),
+              const Center(child: FaB()),
+              const Center(
                 child:
                     Align(alignment: Alignment.bottomCenter, child: Imprint()),
               )

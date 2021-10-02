@@ -1,0 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'forms.dart';
+import 'get_guest_data.dart';
+import 'imprint.dart';
+import 'language.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
+
+class EntryScreen extends StatelessWidget {
+  const EntryScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    String formattedDate =
+        DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+    return Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+            title: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Successfully Registered!"),
+            )),
+        body: Column(children: [
+          const Center(
+              child: Icon(
+            Icons.check,
+            size: 200,
+          )),
+          Center(
+            child: Text("Entry at: " + formattedDate),
+          )
+        ]));
+  }
+}

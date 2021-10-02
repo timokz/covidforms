@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'entry_screen.dart';
 import 'location_dropdown.dart';
 import 'guest.dart';
 import 'email_form.dart';
@@ -160,7 +161,9 @@ class _NameFormState extends State<NameForm> {
           if (vController.text.isNotEmpty && nController.text.isNotEmpty)
             {
               Guest(vController.text, nController.text, guestEmail,
-                  guestLocation),
+                  guestLocation, DateTime.now()),
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const EntryScreen())),
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Processing Data'))),
             }

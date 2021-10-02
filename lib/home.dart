@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               Center(
                   child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
+                      behavior: HitTestBehavior.opaque,
                       onTap: _launchURL, // handle your image tap here
                       child: const Image(
                         image: AssetImage('graphics/tqwlogo.jfif'),

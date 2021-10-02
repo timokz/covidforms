@@ -56,7 +56,7 @@ class _AppState extends State<App> {
       return const Text("fuck");
     }
     //TODO AppCheck
-    // FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '44f2dace-e0b0-41cf-b3c3-fec89fb90f5e');
+  //  FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E');
     return MaterialApp(
         title: 'tqwcovidreg',
         theme: ThemeData(
@@ -67,7 +67,7 @@ class _AppState extends State<App> {
         home: const HomeScreen());
   }
 }
-
+//TODO replace web/icons
 /*
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

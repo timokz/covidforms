@@ -37,7 +37,7 @@ class _GetGuestDataState extends State<GetGuestData> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                              builder: (context) => const HomeScreen()));
                     })
               ],
             ),
@@ -49,9 +49,15 @@ class _GetGuestDataState extends State<GetGuestData> {
                     Map<String, dynamic> data =
                         document.data()! as Map<String, dynamic>;
                     return ListTile(
-                      title: Text(data['n_name']),
-                      subtitle: Text(data['v_name']),
-                    );
+                        title: Text(data['n_name']),
+                        subtitle: Text(data['v_name']),
+                        onTap: () =>
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                              (data['email'] +
+                                  data['location'] +
+                                  data['entryTime'].toString()),
+                            ))));
                   }).toList(),
                 )) // This trailing comma makes auto-formatting nicer for build methods.
             );

@@ -21,13 +21,11 @@ class _ImprintState extends State<Imprint> {
     void _launchURL() async => await canLaunch(_url)
         ? await launch(_url)
         : throw 'Could not connect to $_url';
-    return Container(
-      child: TextButton(
-        onPressed: () { _launchURL(); },
-        child: Text("TQW IMPRINT"),
+    return TextButton(
+      onPressed: () { _launchURL(); },
+      child: const Text("TQW IMPRINT"),
 
 
-      ),
     );
   }
 }

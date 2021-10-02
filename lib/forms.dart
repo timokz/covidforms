@@ -43,16 +43,7 @@ class _FaBState extends State<FaB> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Form(
-        key: _form,
-        child: Center(
-          child: Column(
-            children: const [NameForm()],
-          ),
-        ),
-      ),
-    );
+    return const NameForm();
   }
 }
 
@@ -64,8 +55,8 @@ class NameForm extends StatefulWidget {
 }
 
 class _NameFormState extends State<NameForm> {
-  String v_name = "";
-  String n_name = "";
+  String vName = "";
+  String nName = "";
   String guestEmail = "";
   String guestLocation = "";
   final vController = TextEditingController();

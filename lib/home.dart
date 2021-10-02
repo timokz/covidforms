@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: const Image(
                         image: AssetImage('graphics/tqwlogo.jfif'),
                       ))),
-              const Center(child: FaB()),
+              const Expanded(child: Center(child: FaB())),
               const Center(
                 child:
                     Align(alignment: Alignment.bottomCenter, child: Imprint()),

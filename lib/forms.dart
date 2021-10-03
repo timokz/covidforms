@@ -152,7 +152,8 @@ class _NameFormState extends State<NameForm> {
           if (vController.text.isNotEmpty && nController.text.isNotEmpty)
             {
               Guest(vController.text, nController.text, guestEmail,
-                  guestLocation, DateTime.now()),
+                      guestLocation, DateTime.now())
+                  .addToDB(),
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const EntryScreen())),
               ScaffoldMessenger.of(context).showSnackBar(

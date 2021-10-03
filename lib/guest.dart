@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class Guest {
   final String vName;
@@ -20,7 +21,12 @@ class Guest {
         "email: " +
         email +
         "location: " +
-        location + "entry: "+ DateTime.now().toString());
+        location +
+        "entry: " +
+        DateTime.now().toString());
+  }
+
+  void addToDB() {
     guests
         .add({
           'n_name': nName,
@@ -32,4 +38,18 @@ class Guest {
         .then((value) => print("Guest Added"))
         .catchError((error) => print("Failed to add Guest: $error"));
   }
+
+  toJson() {}
+}
+
+Guest fromJson(Map<String, Object?> json) {
+
+  return Guest(
+
+    (json['v_name'] as String),
+    (json['n_name'] as String),
+    (json['email'] as String),
+    (json['location'] as String),
+    (json['entryTime'] as Timestamp).toDate(),
+  );
 }

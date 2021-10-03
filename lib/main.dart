@@ -56,14 +56,23 @@ class _AppState extends State<App> {
       return const Text("fuck");
     }
     //TODO AppCheck
-  //  FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E');
+    //  FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E');
     return MaterialApp(
         title: 'tqwcovidreg',
         theme: ThemeData(
           primaryColor: Colors.black,
           backgroundColor: const Color(0xffffffff),
-             fontFamily: 'Roboto',
+          fontFamily: 'Roboto',
         ),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''), // English, no country code
+          Locale('de', ''), // German, no country code
+        ],
         home: const HomeScreen());
   }
 }

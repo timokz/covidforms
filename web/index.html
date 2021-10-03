@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -46,11 +34,8 @@
     }
 
     if ('serviceWorker' in navigator) {
-      // Service workers are supported. Use them.
       window.addEventListener('load', function () {
-        // Wait for registration to finish before dropping the <script> tag.
-        // Otherwise, the browser will load the script multiple times,
-        // potentially different versions.
+
         var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
         navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
@@ -63,24 +48,19 @@
               });
             }
             if (!reg.active && (reg.installing || reg.waiting)) {
-              // No active web worker and we have installed or are installing
-              // one for the first time. Simply wait for it to activate.
+
               waitForActivation(reg.installing || reg.waiting);
             } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
-              // When the app updates the serviceWorkerVersion changes, so we
-              // need to ask the service worker to update.
+
               console.log('New service worker available.');
               reg.update();
               waitForActivation(reg.installing);
             } else {
-              // Existing service worker is still good.
               console.log('Loading app from service worker.');
               loadMainDartJs();
             }
           });
 
-        // If service worker doesn't succeed in a reasonable amount of time,
-        // fallback to plaint <script> tag.
         setTimeout(() => {
           if (!scriptLoaded) {
             console.warn(
@@ -91,7 +71,6 @@
         }, 4000);
       });
     } else {
-      // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
   </script>
@@ -114,8 +93,8 @@
       appId: "1:1068687754897:web:6a5e3b8f90b85911e3a130",
       measurementId: "G-ZJM9PLJ4TL"
     };
-
     firebase.initializeApp(firebaseConfig);
+    firebase.appCheck().activate('6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E', true);
 </script>
 </body>
 </html>

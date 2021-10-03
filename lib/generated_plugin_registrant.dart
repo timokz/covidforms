@@ -20,6 +20,3 @@ void registerPlugins(Registrar registrar) {
   UrlLauncherPlugin.registerWith(registrar);
   registrar.registerMessageHandler();
 }
-// client side rechaptcha : 6LfmSaQcAAAAAJqVudWv4nWF3aMy4lWU4Y4kjP2R
-
-// app rechaptcha : 6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E

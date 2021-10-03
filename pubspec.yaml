@@ -25,6 +25,8 @@ dependencies:
   firebase_app_check: "^0.0.2+1"
   cloud_firestore: "^2.5.3"
   http: "^0.13.3"
+  url_launcher: "^6.0.12"
+  email_validator: "^2.0.1"
 
   flutter_localizations:
     sdk: flutter
@@ -40,14 +42,13 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
-
+  generate: true
   uses-material-design: true
 
   fonts:
-    - family: Freya
+    - family: Roboto
       fonts:
-        - asset: fonts/freya-medium.ttf
-        - asset: fonts/freya-bold.ttf
+        - asset: fonts/Roboto-Regular.ttf
           style: normal
 
   assets:

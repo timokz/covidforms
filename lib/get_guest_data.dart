@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidreg/home.dart';
 import 'package:flutter/material.dart';
+import 'guest.dart';
+import 'package:intl/intl.dart';
 
 class GetGuestData extends StatefulWidget {
   const GetGuestData({Key? key}) : super(key: key);
@@ -15,16 +17,27 @@ class _GetGuestDataState extends State<GetGuestData> {
     final Stream<QuerySnapshot> _guests =
         FirebaseFirestore.instance.collection('guests_testing').snapshots();
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: _guests,
+    final guestRef = FirebaseFirestore.instance
+        .collection('guests_testing')
+        .withConverter<Guest>(
+          fromFirestore: (snapshots, _) => fromJson(snapshots.data()!),
+          toFirestore: (guest, _) => guest.toJson(),
+        );
+
+    return StreamBuilder<QuerySnapshot<Guest>>(
+      stream: guestRef.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return const Text('Snapshot returned with Error');
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
+        final data = snapshot.requireData;
+
         return Scaffold(
             backgroundColor: const Color(0xffffffff),
             appBar: AppBar(
@@ -43,24 +56,31 @@ class _GetGuestDataState extends State<GetGuestData> {
             ),
             body: Padding(
                 padding: const EdgeInsets.all(64.0),
-                child: ListView(
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return ListTile(
-                        title: Text(data['n_name']),
-                        subtitle: Text(data['v_name']),
-                        onTap: () =>
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                              (data['email'] +
-                                  data['location'] +
-                                  data['entryTime'].toString()),
-                            ))));
-                  }).toList(),
-                )) // This trailing comma makes auto-formatting nicer for build methods.
-            );
+                child: SizedBox(
+                    width: double.infinity,
+                    child: ListView.builder(
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            
+                          );
+                        })
+                    /*   child: DataTable(columns: const [
+                      DataColumn(label: Text("Name")),
+                      DataColumn(label: Text("Location")),
+                      DataColumn(label: Text("eMail")),
+                      DataColumn(label: Text("Entry")),
+                    ],
+                        rows: List<DataRow>.generate(
+                      data.size,
+                            (int index) = > DataRow(
+                            cells:
+                        )
+                    )[
+                    ])) */
+
+                    ) // This trailing comma makes auto-formatting nicer for build methods.
+                ));
       },
     );
   }

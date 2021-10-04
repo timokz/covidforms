@@ -5,7 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'forms.dart';
 import 'get_guest_data.dart';
 import 'imprint.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool langEn = true;
+
   @override
   Widget build(BuildContext context) {
     const _url = 'https://tqw.at';
@@ -27,9 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
           title: TextButton(
               style: const ButtonStyle(),
               onPressed: _launchURL,
-              child: const Text(
-                "TQW Covid Form",
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.home_title,
+                //  Text("TQW Covid Form",
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: "Roboto",
                   fontStyle: FontStyle.italic,
@@ -37,6 +41,23 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
           backgroundColor: Colors.black,
           actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                print("language change incoming");
+                String lang = "";
+                if (langEn) {
+                  lang = 'de';
+                  langEn = false;
+                } else {
+                  lang = 'en';
+                  langEn = true;
+                }
+                Locale newLocale = Locale(lang, '');
+
+                App.setLocale(context, newLocale);
+              },
+              icon: const Icon(Icons.g_translate),
+            ),
             IconButton(
                 icon: const Icon(Icons.settings),
                 onPressed: () {

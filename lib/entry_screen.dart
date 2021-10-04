@@ -6,6 +6,7 @@ import 'get_guest_data.dart';
 import 'imprint.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EntryScreen extends StatelessWidget {
   const EntryScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class EntryScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("Successfully Registered!"),
+              child: Text(AppLocalizations.of(context)!.registered),
             )),
         body: Column(children: [
           const Center(

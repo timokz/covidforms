@@ -9,6 +9,7 @@ import 'entry_screen.dart';
 import 'location_dropdown.dart';
 import 'guest.dart';
 import 'email_form.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
@@ -83,9 +84,9 @@ class _NameFormState extends State<NameForm> {
         style: const TextStyle(
           fontFamily: 'Arial',
         ),
-        decoration: const InputDecoration(
-          hintText: "First name",
-          prefixIcon: Icon(Icons.person),
+        decoration: InputDecoration(
+          hintText: AppLocalizations.of(context)!.firstName,
+          prefixIcon: const Icon(Icons.person),
         ),
         controller: vController,
       ),
@@ -93,8 +94,9 @@ class _NameFormState extends State<NameForm> {
         height: 10,
       ),
       TextField(
-        decoration: const InputDecoration(
-            hintText: "Last name", prefixIcon: Icon(Icons.person)),
+        decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.lastName,
+            prefixIcon: const Icon(Icons.person)),
         controller: nController,
       ),
       const SizedBox(
@@ -117,10 +119,10 @@ class _NameFormState extends State<NameForm> {
         height: 10,
       ),
       TextFormField(
-          decoration: const InputDecoration(
-              labelText: 'Telephone*',
+          decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.telephone,
               hintText: "+43 660 3111499",
-              prefixIcon: Icon(Icons.phone)),
+              prefixIcon: const Icon(Icons.phone)),
           keyboardType: TextInputType.phone,
           validator: (String? value) {
             String sanitizedVal = value!.trim();

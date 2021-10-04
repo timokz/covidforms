@@ -1,6 +1,16 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
-    }
+  "helloWorld": "Hallo Welt!",
+  "@helloWorld": {
+    "description": "DeutschASDFEA"
+  },
+  "home_title": "TQW Covid Form",
+  "telephone": "Telephone - Nr.",
+  "firstName": "First Name",
+  "lastName" : "Last Name",
+  "location" : "Location",
+  "register" : "Register",
+  "registered" :"Successfully Registered",
+  "biblio" : "Library",
+  "imprint" : "imprint"
+
 }

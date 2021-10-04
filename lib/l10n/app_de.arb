@@ -1,6 +1,15 @@
 {
-    "helloWorld": "Hallo Welt!",
-    "@helloWorld": {
-      "description": "DeutschASDFEA"
-    }
+  "helloWorld": "Hallo Welt!",
+  "@helloWorld": {
+    "description": "DeutschASDFEA"
+  },
+  "home_title": "TQW Covid Formular",
+  "telephone": "Telefon - Nr. ",
+  "firstName": "Vorname",
+  "lastName" : "Nachname",
+  "location" : "Ort",
+  "register" : "Registrieren",
+  "registered" :"Erforlgreich Registriert",
+  "biblio" : "Bibliothek",
+  "imprint" : "Impressum"
 }

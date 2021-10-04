@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'forms.dart';
 import 'get_guest_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LocationDropdown extends StatefulWidget {
   late final ValueChanged<String> onChanged;
@@ -21,15 +22,15 @@ class _LocationDropdownState extends State<LocationDropdown> {
         color: Colors.grey,
         fontSize: 16,
       ),
-      decoration: const InputDecoration(
-        prefixIcon: Icon(Icons.location_pin),
-        hintText: "Location",
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.location_pin),
+        hintText: AppLocalizations.of(context)!.location,
       ),
       items: <String>[
         'Studio 1',
         'Studio 2',
         'Studio 3',
-        'Bibliothek',
+        AppLocalizations.of(context)!.biblio,
         'Office'
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(

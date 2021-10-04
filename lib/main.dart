@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,6 +7,7 @@ import 'forms.dart';
 import 'home.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:async';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +17,11 @@ void main() {
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _AppState? state = context.findAncestorStateOfType<_AppState>();
+    state!.changeLanguage(newLocale);
+  }
+
   @override
   _AppState createState() => _AppState();
 }
@@ -22,10 +30,18 @@ class _AppState extends State<App> {
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;
+  Locale _locale = Locale("en");
+
   Future<void> initializeDefault() async {
     FirebaseApp app = await Firebase.initializeApp();
     assert(app != null);
     print('Initialized default app $app');
+  }
+
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
   }
 
   @override
@@ -64,15 +80,25 @@ class _AppState extends State<App> {
           backgroundColor: const Color(0xffffffff),
           fontFamily: 'Roboto',
         ),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
         supportedLocales: const [
           Locale('en', ''), // English, no country code
           Locale('de', ''), // German, no country code
         ],
+        locale: _locale,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale!.languageCode) {
+              return supportedLocale;
+            }
+          }
+          return supportedLocales.first;
+        },
         home: const HomeScreen());
   }
 }

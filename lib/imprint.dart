@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'main.dart';
 import 'home.dart';
@@ -13,8 +14,6 @@ class Imprint extends StatefulWidget {
 }
 
 class _ImprintState extends State<Imprint> {
-
-
   @override
   Widget build(BuildContext context) {
     var _url = "https://tqw.at/hausordnung/";
@@ -22,10 +21,10 @@ class _ImprintState extends State<Imprint> {
         ? await launch(_url)
         : throw 'Could not connect to $_url';
     return TextButton(
-      onPressed: () { _launchURL(); },
-      child: const Text("TQW IMPRINT"),
-
-
+      onPressed: () {
+        _launchURL();
+      },
+      child: Text("TQW " + AppLocalizations.of(context)!.imprint),
     );
   }
 }

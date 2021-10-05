@@ -24,6 +24,13 @@ class _GetGuestDataState extends State<GetGuestData> {
           toFirestore: (guest, _) => guest.toJson(),
         );
 
+    bool guestDataTimeCheck(var guestRef) {
+      var cutoff = DateTime.now();
+      var guests = FirebaseFirestore.instance.collection('guests_testing');
+
+      return true;
+    }
+
     return StreamBuilder<QuerySnapshot<Guest>>(
       stream: guestRef.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -61,9 +68,7 @@ class _GetGuestDataState extends State<GetGuestData> {
                     child: ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            
-                          );
+                          return const ListTile();
                         })
                     /*   child: DataTable(columns: const [
                       DataColumn(label: Text("Name")),

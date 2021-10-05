@@ -137,7 +137,10 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
-      ElevatedButton(
+      AnimatedAlign(
+      alignment: Alignment.centerRight ,
+      duration: const Duration(seconds: 1),
+      child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
@@ -171,7 +174,7 @@ class _NameFormState extends State<NameForm> {
           "Register",
           style: TextStyle(fontFamily: 'Arial'),
         ),
-      )
+      ))
     ]);
   }
 }

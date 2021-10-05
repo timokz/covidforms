@@ -31,7 +31,7 @@ class _LocationDropdownState extends State<LocationDropdown> {
         'Studio 2',
         'Studio 3',
         AppLocalizations.of(context)!.biblio,
-        'Office'
+        AppLocalizations.of(context)!.office,
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

@@ -31,7 +31,8 @@ class EntryScreen extends StatelessWidget {
             size: 200,
           )),
           Center(
-            child: Text("Entry at: " + formattedDate),
+            child: Text(
+                AppLocalizations.of(context)!.entry + ": " + formattedDate),
           )
         ]));
   }

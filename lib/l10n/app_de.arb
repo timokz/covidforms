@@ -11,5 +11,7 @@
   "register" : "Registrieren",
   "registered" :"Erforlgreich Registriert",
   "biblio" : "Bibliothek",
-  "imprint" : "Impressum"
+  "imprint" : "Impressum",
+  "entry" : "Eintritt um",
+  "office" : "Büros"
 }

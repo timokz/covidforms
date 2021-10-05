@@ -30,7 +30,7 @@ class _AppState extends State<App> {
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;
-  Locale _locale = Locale("en");
+  Locale _locale = const Locale("en");
 
   Future<void> initializeDefault() async {
     FirebaseApp app = await Firebase.initializeApp();
@@ -69,7 +69,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     if (_error) {
       print("error establishing connection");
-      return const Text("fuck");
+      return const Text("No Connection established");
     }
     //TODO AppCheck
     //  FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E');

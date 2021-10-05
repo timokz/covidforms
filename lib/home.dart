@@ -34,16 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 AppLocalizations.of(context)!.home_title,
                 //  Text("TQW Covid Form",
                 style: const TextStyle(
+                  decorationColor: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Roboto",
-                  fontStyle: FontStyle.italic,
+              //    fontStyle: FontStyle.italic,
                 ),
               )),
           backgroundColor: Colors.black,
           actions: <Widget>[
             IconButton(
               onPressed: () {
-                print("language change incoming");
                 String lang = "";
                 if (langEn) {
                   lang = 'de';

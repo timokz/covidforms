@@ -11,6 +11,7 @@
   "register" : "Register",
   "registered" :"Successfully Registered",
   "biblio" : "Library",
-  "imprint" : "imprint"
-
+  "imprint" : "imprint",
+  "entry" : "entry at",
+  "office" : "Office"
 }

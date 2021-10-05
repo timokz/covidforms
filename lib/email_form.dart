@@ -23,8 +23,7 @@ class _EmailFormState extends State<EmailForm> {
       child: Form(
         child: TextFormField(
             validator: (String? value) {
-              final bool isValid = EmailValidator.validate(value!);
-              return (!value.contains('@') && value.isNotEmpty && !isValid)
+              return (!value!.contains('@') && value.isNotEmpty && EmailValidator.validate(value))
                   ? 'Incorrect format.'
                   : null;
             },

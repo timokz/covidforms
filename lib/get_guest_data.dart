@@ -14,8 +14,6 @@ class GetGuestData extends StatefulWidget {
 class _GetGuestDataState extends State<GetGuestData> {
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _guests =
-        FirebaseFirestore.instance.collection('guests_testing').snapshots();
 
     final guestRef = FirebaseFirestore.instance
         .collection('guests_testing')
@@ -24,11 +22,25 @@ class _GetGuestDataState extends State<GetGuestData> {
           toFirestore: (guest, _) => guest.toJson(),
         );
 
-    bool guestDataTimeCheck(var guestRef) {
-      var cutoff = DateTime.now();
-      var guests = FirebaseFirestore.instance.collection('guests_testing');
+    void guestDataTimeCheck() {
+      int cutoff = DateTime.now().subtract(const Duration(days:28)).toUtc().millisecondsSinceEpoch;
+      var guests = FirebaseFirestore.instance
+          .collection('guests_testing')
+          /*.where("entryTime",
+              isGreaterThanOrEqualTo: cutoff) */
+          .get()
+          .then((QuerySnapshot query) {
+            int i = 0;
+        for (DocumentSnapshot doc in query.docs) {
+          Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
+          DateTime dt = (map['entryTime'] ??= Timestamp.now() as Timestamp).toDate();
+          print(dt.toString());
 
-      return true;
+
+          print(i++);
+        //  print(doc["v_Name"]);
+        }
+      });
     }
 
     return StreamBuilder<QuerySnapshot<Guest>>(
@@ -43,6 +55,8 @@ class _GetGuestDataState extends State<GetGuestData> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
+        print("Guest Data Time Check: ");
+        guestDataTimeCheck();
         final data = snapshot.requireData;
 
         return Scaffold(

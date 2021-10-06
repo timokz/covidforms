@@ -23,7 +23,7 @@ class Guest {
         "location: " +
         location +
         "entry: " +
-        DateTime.now().toString());
+        entryTime.toString());
   }
 
   void addToDB() {

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidreg/home.dart';
 import 'package:flutter/material.dart';
 import 'guest.dart';
+import 'guest_document_item.dart';
 import 'package:intl/intl.dart';
 
 class GetGuestData extends StatefulWidget {
@@ -14,31 +15,32 @@ class GetGuestData extends StatefulWidget {
 class _GetGuestDataState extends State<GetGuestData> {
   @override
   Widget build(BuildContext context) {
-
     final guestRef = FirebaseFirestore.instance
         .collection('guests_testing')
         .withConverter<Guest>(
-          fromFirestore: (snapshots, _) => fromJson(snapshots.data()!),
+          fromFirestore: (snapshots, _) => Guest.fromJson(snapshots.data()!),
           toFirestore: (guest, _) => guest.toJson(),
         );
 
     void guestDataTimeCheck() {
-      int cutoff = DateTime.now().subtract(const Duration(days:28)).toUtc().millisecondsSinceEpoch;
+      int cutoff = DateTime.now()
+          .subtract(const Duration(days: 28))
+          .toUtc()
+          .millisecondsSinceEpoch;
       var guests = FirebaseFirestore.instance
           .collection('guests_testing')
           /*.where("entryTime",
               isGreaterThanOrEqualTo: cutoff) */
           .get()
           .then((QuerySnapshot query) {
-            int i = 0;
+        int i = 0;
         for (DocumentSnapshot doc in query.docs) {
           Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
-          DateTime dt = (map['entryTime'] ??= Timestamp.now() as Timestamp).toDate();
+          DateTime dt =
+              (map['entryTime'] ??= Timestamp.now()).toDate();
           print(dt.toString());
-
-
           print(i++);
-        //  print(doc["v_Name"]);
+          //  print(doc["v_Name"]);
         }
       });
     }
@@ -82,7 +84,10 @@ class _GetGuestDataState extends State<GetGuestData> {
                     child: ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
-                          return const ListTile();
+                          return GuestItem(
+                            data.docs[index].reference as DocumentReference<Guest>,
+                            data.docs[index].data() as Guest,
+                          );
                         })
                     /*   child: DataTable(columns: const [
                       DataColumn(label: Text("Name")),
@@ -103,4 +108,6 @@ class _GetGuestDataState extends State<GetGuestData> {
       },
     );
   }
+
+
 }

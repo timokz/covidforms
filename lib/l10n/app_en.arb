@@ -1,8 +1,4 @@
 {
-  "helloWorld": "Hallo Welt!",
-  "@helloWorld": {
-    "description": "DeutschASDFEA"
-  },
   "home_title": "TQW Covid Form",
   "telephone": "Telephone - Nr.",
   "firstName": "First Name",

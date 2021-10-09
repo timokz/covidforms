@@ -11,7 +11,7 @@ class GuestCheck {
     for (int x = 0; x < 55; ++x) {
       print("Position in check que: " + x.toString());
       var date = DateTime.now().subtract(Duration(days: duration++));
-      guestCheckList.add(Guest(vName.toString(), nName.toString(),
+      guestCheckList.add(Guest.fromParams(vName.toString(), nName.toString(),
           "email@test.com", location, date));
       ++vName;
       ++nName;

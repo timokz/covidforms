@@ -156,7 +156,7 @@ class _NameFormState extends State<NameForm> {
         onPressed: () => {
           if (vController.text.isNotEmpty && nController.text.isNotEmpty)
             {
-              Guest(vController.text, nController.text, guestEmail,
+              Guest.fromParams(vController.text, nController.text, guestEmail,
                       guestLocation, DateTime.now())
                   .addToDB(),
               Navigator.push(context,

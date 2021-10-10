@@ -27,20 +27,15 @@ class _GetGuestDataState extends State<GetGuestData> {
           .subtract(const Duration(days: 28))
           .toUtc()
           .millisecondsSinceEpoch;
-      var guests = FirebaseFirestore.instance
+      FirebaseFirestore.instance
           .collection('guests_testing')
-          /*.where("entryTime",
-              isGreaterThanOrEqualTo: cutoff) */
+          .where('entryTime', isGreaterThanOrEqualTo: cutoff)
           .get()
           .then((QuerySnapshot query) {
-        int i = 0;
         for (DocumentSnapshot doc in query.docs) {
           Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
-          DateTime dt =
-              (map['entryTime'] ??= Timestamp.now()).toDate();
+          DateTime dt = (map['entryTime'] ??= Timestamp.now()).toDate();
           print(dt.toString());
-          print(i++);
-          //  print(doc["v_Name"]);
         }
       });
     }
@@ -85,29 +80,13 @@ class _GetGuestDataState extends State<GetGuestData> {
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return GuestItem(
-                            data.docs[index].reference as DocumentReference<Guest>,
+                            data.docs[index].reference
+                                as DocumentReference<Guest>,
                             data.docs[index].data() as Guest,
                           );
-                        })
-                    /*   child: DataTable(columns: const [
-                      DataColumn(label: Text("Name")),
-                      DataColumn(label: Text("Location")),
-                      DataColumn(label: Text("eMail")),
-                      DataColumn(label: Text("Entry")),
-                    ],
-                        rows: List<DataRow>.generate(
-                      data.size,
-                            (int index) = > DataRow(
-                            cells:
-                        )
-                    )[
-                    ])) */
-
-                    ) // This trailing comma makes auto-formatting nicer for build methods.
+                        })) // This trailing comma makes auto-formatting nicer for build methods.
                 ));
       },
     );
   }
-
-
 }

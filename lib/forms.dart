@@ -170,9 +170,9 @@ class _NameFormState extends State<NameForm> {
                   const SnackBar(content: Text('Please enter valid Data ')))
             }
         },
-        child: const Text(
-          "Register",
-          style: TextStyle(fontFamily: 'Arial'),
+        child: Text(
+          AppLocalizations.of(context)!.register,
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
       ))
     ]);

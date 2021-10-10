@@ -9,7 +9,7 @@ class GuestCheck {
     List<Guest> guestCheckList = List.empty(growable: true);
     int duration = 28;
     for (int x = 0; x < 55; ++x) {
-      print("Position in check que: " + x.toString());
+      print("Position in check queue: " + x.toString());
       var date = DateTime.now().subtract(Duration(days: duration++));
       guestCheckList.add(Guest.fromParams(vName.toString(), nName.toString(),
           "email@test.com", location, date));

@@ -86,9 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child:
                     Align(alignment: Alignment.bottomCenter, child: Imprint()),
               ),
-              FloatingActionButton( //testing only TODO
-                onPressed: GuestCheck().addGuestChecks,
-                tooltip: ("adding old Guests"),
+              Center(
+                child: Text(AppLocalizations.of(context)!.dsgvo),
               ),
               //imprint
               //    Center(child:),

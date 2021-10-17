@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'location_dropdown.dart';
 import 'guest.dart';
 import 'email_form.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'gdrp_checkbox.dart';
 
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
@@ -63,6 +63,8 @@ class _NameFormState extends State<NameForm> {
   final vController = TextEditingController();
   final nController = TextEditingController();
   final pController = TextEditingController();
+  bool isChecked = false;
+
   CollectionReference guests =
       FirebaseFirestore.instance.collection('guests_testing');
 
@@ -121,7 +123,7 @@ class _NameFormState extends State<NameForm> {
       TextFormField(
           decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.telephone,
-              hintText: "+43 660 3111499",
+              hintText: "+43 660 1418155",
               prefixIcon: const Icon(Icons.phone)),
           keyboardType: TextInputType.phone,
           validator: (String? value) {
@@ -137,44 +139,91 @@ class _NameFormState extends State<NameForm> {
       const SizedBox(
         height: 10,
       ),
-      AnimatedAlign(
-      alignment: Alignment.centerRight ,
-      duration: const Duration(seconds: 1),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-          primary: Colors.black,
-          shadowColor: Colors.white,
-          elevation: 5,
-          minimumSize: (const Size(150, 50)),
-          enableFeedback: true,
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        onPressed: () => {
-          if (vController.text.isNotEmpty && nController.text.isNotEmpty)
-            {
-              Guest.fromParams(vController.text, nController.text, guestEmail,
-                      guestLocation, DateTime.now())
-                  .addToDB(),
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const EntryScreen())),
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Processing Data'))),
-            }
-          else
-            {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Please enter valid Data ')))
-            }
+      FormField<bool>(
+        builder: (state) {
+          return Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Checkbox(
+                      value: isChecked,
+                      onChanged: (value) {
+                        setState(() {
+//save checkbox value to variable that store terms and notify form that state changed
+                          isChecked = value!;
+                          state.didChange(value);
+                        });
+                      }),
+                  Text('I accept terms'),
+                ],
+              ),
+//display error in matching theme
+              Text(
+                state.errorText ?? '',
+                style: TextStyle(
+                  color: Theme.of(context).errorColor,
+                ),
+              )
+            ],
+          );
         },
-        child: Text(
-          AppLocalizations.of(context)!.register,
-          style: const TextStyle(fontFamily: 'Arial'),
-        ),
-      ))
+//output from validation will be displayed in state.errorText (above)
+        validator: (value) {
+          if (!isChecked) {
+            return 'You need to accept terms';
+          } else {
+            return null;
+          }
+        },
+      ),
+      /*  Align(
+          alignment: Alignment.centerLeft,
+          child: GdrpCheckbox(
+            onChecked: (bool checked) {
+              isChecked = true;
+            },
+          )) , */
+      AnimatedAlign(
+          alignment: Alignment.centerRight,
+          duration: const Duration(seconds: 1),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80.0)),
+              primary: Colors.black,
+              shadowColor: Colors.white,
+              elevation: 5,
+              minimumSize: (const Size(150, 50)),
+              enableFeedback: true,
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onPressed: () => {
+              if (vController.text.isNotEmpty && nController.text.isNotEmpty)
+                {
+                  Guest.fromParams(vController.text, nController.text,
+                          guestEmail, guestLocation, DateTime.now())
+                      .addToDB(),
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EntryScreen())),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data'))),
+                }
+              else
+                {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please enter valid Data ')))
+                }
+            },
+            child: Text(
+              AppLocalizations.of(context)!.register,
+              style: const TextStyle(
+                  fontFamily: 'Roboto', fontStyle: FontStyle.italic),
+            ),
+          ))
     ]);
   }
 }

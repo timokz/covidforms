@@ -9,5 +9,7 @@
   "biblio" : "Library",
   "imprint" : "imprint",
   "entry" : "entry at",
-  "office" : "Office"
+  "office" : "Office",
+  "dsgvo" : "Your data will be used exclusively for this purpose, stored encrypted and deleted after 28 days.",
+  "time" : "Entry Time"
 }

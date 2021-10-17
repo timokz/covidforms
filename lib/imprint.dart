@@ -28,3 +28,6 @@ class _ImprintState extends State<Imprint> {
     );
   }
 }
+
+/* Ihre Daten werden aussschließlich zu diesem Zweck verwendet, verschlüsselt gespeichert und nach 28 Tagen gelöscht.*/
+/* Your data will be used exclusively for this purpose, stored encrypted and deleted after 28 days. */

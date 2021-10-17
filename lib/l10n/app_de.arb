@@ -9,5 +9,7 @@
   "biblio" : "Bibliothek",
   "imprint" : "Impressum",
   "entry" : "Eintritt um",
-  "office" : "Büros"
+  "office" : "Büros",
+  "dsgvo" : "Ihre Daten werden aussschließlich zu diesem Zweck verwendet, verschlüsselt gespeichert und nach 28 Tagen gelöscht.",
+  "time" : "Eintrittszeit"
 }

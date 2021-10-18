@@ -154,7 +154,9 @@ class _NameFormState extends State<NameForm> {
                           state.didChange(value);
                         });
                       }),
-                  Text('I accept terms'),
+                  Text(
+                    AppLocalizations.of(context)!.terms,
+                  ),
                 ],
               ),
 //display error in matching theme
@@ -167,22 +169,8 @@ class _NameFormState extends State<NameForm> {
             ],
           );
         },
-//output from validation will be displayed in state.errorText (above)
-        validator: (value) {
-          if (!isChecked) {
-            return 'You need to accept terms';
-          } else {
-            return null;
-          }
-        },
       ),
-      /*  Align(
-          alignment: Alignment.centerLeft,
-          child: GdrpCheckbox(
-            onChecked: (bool checked) {
-              isChecked = true;
-            },
-          )) , */
+
       AnimatedAlign(
           alignment: Alignment.centerRight,
           duration: const Duration(seconds: 1),
@@ -200,7 +188,9 @@ class _NameFormState extends State<NameForm> {
               ),
             ),
             onPressed: () => {
-              if (vController.text.isNotEmpty && nController.text.isNotEmpty)
+              if (vController.text.isNotEmpty &&
+                  nController.text.isNotEmpty &&
+                  isChecked)
                 {
                   Guest.fromParams(vController.text, nController.text,
                           guestEmail, guestLocation, DateTime.now())
@@ -209,13 +199,21 @@ class _NameFormState extends State<NameForm> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const EntryScreen())),
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data'))),
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content:
+                          Text(AppLocalizations.of(context)!.entered_data))),
+                }
+              else if (isChecked == false)
+                {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content:
+                          Text(AppLocalizations.of(context)!.terms_check))),
                 }
               else
                 {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please enter valid Data ')))
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content:
+                          Text(AppLocalizations.of(context)!.invalid_data))),
                 }
             },
             child: Text(

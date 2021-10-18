@@ -3,9 +3,13 @@ import 'package:covidreg/home.dart';
 import 'package:flutter/material.dart';
 import 'guest.dart';
 import 'guest_data_source.dart';
-import 'guest_document_item.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:syncfusion_flutter_datagrid_export/export.dart';
+import 'dart:convert';
+import 'dart:html';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart'
+    hide Alignment, Column, Row;
 
 class GetGuestData extends StatefulWidget {
   const GetGuestData({Key? key}) : super(key: key);
@@ -15,6 +19,8 @@ class GetGuestData extends StatefulWidget {
 }
 
 class _GetGuestDataState extends State<GetGuestData> {
+  final GlobalKey<SfDataGridState> _key = GlobalKey<SfDataGridState>();
+
   @override
   Widget build(BuildContext context) {
     final guestRef = FirebaseFirestore.instance
@@ -44,6 +50,21 @@ class _GetGuestDataState extends State<GetGuestData> {
 
     GuestDataSource gdc(List<Guest> guestList) {
       return GuestDataSource(guests: guestList);
+    }
+
+    Future<void> exportDataGridToExcel() async {
+      final Workbook workbook = _key.currentState!.exportToExcelWorkbook();
+      final Worksheet sheet = workbook.worksheets[0];
+      sheet.getRangeByName('A1').setText('Hello World!');
+
+      final List<int> bytes = workbook.saveAsStream();
+      workbook.dispose();
+
+      AnchorElement(
+          href:
+              "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}")
+        ..setAttribute("download", "output.xlsx")
+        ..click();
     }
 
     return StreamBuilder<QuerySnapshot<Guest>>(
@@ -80,10 +101,14 @@ class _GetGuestDataState extends State<GetGuestData> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const HomeScreen()));
-                      })
+                      }),
+                  IconButton(
+                      onPressed: exportDataGridToExcel,
+                      icon: const Icon(Icons.airplane_ticket))
                 ],
               ),
               body: SfDataGrid(
+                key: _key,
                 source: gdc(guestList),
                 columnWidthMode: ColumnWidthMode.fill,
                 allowSorting: true,

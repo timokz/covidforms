@@ -9,7 +9,6 @@ class GdrpCheckbox extends StatefulWidget {
   void onChanged(param0) {}
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class _GdrpCheckboxState extends State<GdrpCheckbox> {
   bool isChecked = false;
 

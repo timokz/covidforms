@@ -7,9 +7,14 @@
   "register" : "Register",
   "registered" :"Successfully Registered",
   "biblio" : "Library",
-  "imprint" : "imprint",
+  "imprint" : "House Rules",
   "entry" : "entry at",
   "office" : "Office",
-  "dsgvo" : "Your data will be used exclusively for this purpose, stored encrypted and deleted after 28 days.",
-  "time" : "Entry Time"
+  "dsgvo" : "*Your data will be used exclusively for Contact Tracing, stored encrypted and deleted after 28 days.",
+  "time" : "Entry Time",
+  "terms" : "I accept the House Rules and processing of my Data*",
+  "h_url" : "https://tqw.at/en/house-rules/",
+  "entered_data" : "Processing Data",
+  "invalid_data" : "Please enter valid Data",
+  "terms_check" : "Please confirm the House Rules and GDPR"
 }

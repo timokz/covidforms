@@ -7,9 +7,14 @@
   "register" : "Registrieren",
   "registered" :"Erforlgreich Registriert",
   "biblio" : "Bibliothek",
-  "imprint" : "Impressum",
+  "imprint" : "Hausordnung",
   "entry" : "Eintritt um",
   "office" : "Büros",
-  "dsgvo" : "Ihre Daten werden aussschließlich zu diesem Zweck verwendet, verschlüsselt gespeichert und nach 28 Tagen gelöscht.",
-  "time" : "Eintrittszeit"
+  "dsgvo" : "*Ihre Daten werden aussschließlich zu Contact Tracing verwendet, verschlüsselt gespeichert und nach 28 Tagen gelöscht.",
+  "time" : "Eintrittszeit",
+  "terms" : "Ich akzeptiere die Hausordnung und die Speicherung meiner Daten*",
+  "h_url" : "https://tqw.at/hausordnung/",
+  "entered_data" : "Verarbeitung der Daten",
+  "invalid_data" : "Bitte geben Sie gültige Daten ein",
+  "terms_check" : "Bitte bestätigen Sie die Hausordnung und DSGVO"
 }

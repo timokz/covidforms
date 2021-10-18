@@ -7,6 +7,7 @@ import 'get_guest_data.dart';
 import 'imprint.dart';
 import 'main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'privacy_page.dart';
 import 'guest_data_check.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -87,8 +88,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Align(alignment: Alignment.bottomCenter, child: Imprint()),
               ),
               Center(
-                child: Text(AppLocalizations.of(context)!.dsgvo),
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Privacy()));
+                    },
+                    child: const Text("Datenschutz")),
               ),
+              Text(AppLocalizations.of(context)!.dsgvo)
               //imprint
               //    Center(child:),
             ],

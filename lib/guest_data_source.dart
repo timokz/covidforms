@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'guest.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datagrid_export/export.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 class GuestDataSource extends DataGridSource {
   GuestDataSource({required List<Guest> guests}) {
@@ -25,10 +27,6 @@ class GuestDataSource extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
       return Container(
-        alignment: (dataGridCell.columnName == 'vName' ||
-                dataGridCell.columnName == 'entryTime')
-            ? Alignment.centerRight
-            : Alignment.centerLeft,
         padding: const EdgeInsets.all(16.0),
         child: Text(dataGridCell.value.toString()),
       );

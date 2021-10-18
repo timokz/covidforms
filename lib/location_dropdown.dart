@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LocationDropdown extends StatefulWidget {
   late final ValueChanged<String> onChanged;
 
-   LocationDropdown({Key? key, required this.onChanged}) : super(key: key);
+  LocationDropdown({Key? key, required this.onChanged}) : super(key: key);
 
   @override
   State<LocationDropdown> createState() => _LocationDropdownState();
@@ -25,6 +25,7 @@ class _LocationDropdownState extends State<LocationDropdown> {
         hintText: AppLocalizations.of(context)!.location,
       ),
       items: <String>[
+        'Halle G (Party)',
         'Studio 1',
         'Studio 2',
         'Studio 3',

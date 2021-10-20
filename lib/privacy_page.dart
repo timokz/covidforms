@@ -28,10 +28,10 @@ class _PrivacyState extends State<Privacy> {
                 child: const Text(
                   "",
                 ))),
-        body: Column(children: const [
+        body: SingleChildScrollView(
+            child: Column(children: const [
           Center(
-            child:
-                Text(""""
+            child: Text(""""
  
                 Datenschutzrechtliche Information nach Art. 13 DSGVO:
                 Zweck und Rechtsgrundlagen der Verarbeitung:
@@ -78,7 +78,7 @@ class _PrivacyState extends State<Privacy> {
                 Barichgasse 40-42, 1030 Wien, E-Mail: dsb@dsb.gv.at
                 """),
           )
-        ]));
+        ])));
   }
 }
 

@@ -77,151 +77,154 @@ class _NameFormState extends State<NameForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      //TODO actually have to wrap this in Shortcuts() Widget
-      const SizedBox(
-        height: 10,
-      ),
-      TextField(
-        style: const TextStyle(
-          fontFamily: 'Arial',
+    return Column(
+      children: [
+        const SizedBox(
+          height: 10,
         ),
-        decoration: InputDecoration(
-          hintText: AppLocalizations.of(context)!.firstName,
-          prefixIcon: const Icon(Icons.person),
-        ),
-        controller: vController,
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      TextField(
-        decoration: InputDecoration(
-            hintText: AppLocalizations.of(context)!.lastName,
-            prefixIcon: const Icon(Icons.person)),
-        controller: nController,
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      LocationDropdown(
-        onChanged: (newLocation) {
-          guestLocation = newLocation;
-        },
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      EmailForm(
-        onEmailChanged: (newEmail) {
-          guestEmail = newEmail;
-        },
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      TextFormField(
+        TextField(
+          style: const TextStyle(
+            fontFamily: 'Arial',
+          ),
           decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.telephone,
-              hintText: "+43 660 1418155",
-              prefixIcon: const Icon(Icons.phone)),
-          keyboardType: TextInputType.phone,
-          validator: (String? value) {
-            String sanitizedVal = value!.trim();
-            if (sanitizedVal.isEmpty) {
-              return 'Value required';
-            }
-            return null;
+            hintText: AppLocalizations.of(context)!.firstName,
+            prefixIcon: const Icon(Icons.person),
+          ),
+          controller: vController,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        TextField(
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.lastName,
+              prefixIcon: const Icon(Icons.person)),
+          controller: nController,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        LocationDropdown(
+          onChanged: (newLocation) {
+            guestLocation = newLocation;
           },
-          onChanged: (String str) {
-            setState(() {});
-          }),
-      const SizedBox(
-        height: 10,
-      ),
-      FormField<bool>(
-        builder: (state) {
-          return Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Checkbox(
-                      value: isChecked,
-                      onChanged: (value) {
-                        setState(() {
-//save checkbox value to variable that store terms and notify form that state changed
-                          isChecked = value!;
-                          state.didChange(value);
-                        });
-                      }),
-                  Text(
-                    AppLocalizations.of(context)!.terms,
-                  ),
-                ],
-              ),
-//display error in matching theme
-              Text(
-                state.errorText ?? '',
-                style: TextStyle(
-                  color: Theme.of(context).errorColor,
-                ),
-              )
-            ],
-          );
-        },
-      ),
-
-      AnimatedAlign(
-          alignment: Alignment.centerRight,
-          duration: const Duration(seconds: 1),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(80.0)),
-              primary: Colors.black,
-              shadowColor: Colors.white,
-              elevation: 5,
-              minimumSize: (const Size(150, 50)),
-              enableFeedback: true,
-              textStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onPressed: () => {
-              if (vController.text.isNotEmpty &&
-                  nController.text.isNotEmpty &&
-                  isChecked)
-                {
-                  Guest.fromParams(vController.text, nController.text,
-                          guestEmail, guestLocation, DateTime.now())
-                      .addToDB(),
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const EntryScreen())),
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content:
-                          Text(AppLocalizations.of(context)!.entered_data))),
-                }
-              else if (isChecked == false)
-                {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content:
-                          Text(AppLocalizations.of(context)!.terms_check))),
-                }
-              else
-                {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content:
-                          Text(AppLocalizations.of(context)!.invalid_data))),
-                }
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        EmailForm(
+          onEmailChanged: (newEmail) {
+            guestEmail = newEmail;
+          },
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        TextFormField(
+            decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.telephone,
+                hintText: "+43 660 1418155",
+                prefixIcon: const Icon(Icons.phone)),
+            keyboardType: TextInputType.phone,
+            validator: (String? value) {
+              String sanitizedVal = value!.trim();
+              if (sanitizedVal.isEmpty) {
+                return 'Value required';
+              }
+              return null;
             },
-            child: Text(
-              AppLocalizations.of(context)!.register,
-              style: const TextStyle(
-                  fontFamily: 'Roboto', fontStyle: FontStyle.italic),
-            ),
-          ))
-    ]);
+            onChanged: (String str) {
+              setState(() {});
+            }),
+        const SizedBox(
+          height: 10,
+        ),
+        FormField<bool>(
+          builder: (state) {
+            print(MediaQuery.of(context).size.width);
+            return Row(
+              children: <Widget>[
+                Checkbox(
+                    value: isChecked,
+                    onChanged: (value) {
+                      setState(() {
+//save checkbox value to variable that store terms and notify form that state changed
+                        isChecked = value!;
+                        state.didChange(value);
+                      });
+                    }),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      AppLocalizations.of(context)!.terms,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Text(
+                  state.errorText ?? '',
+                  style: TextStyle(
+                    color: Theme.of(context).errorColor,
+                  ),
+                )
+              ],
+            );
+//display error in matching theme
+          },
+        ),
+        Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
+                primary: Colors.black,
+                shadowColor: Colors.white,
+                elevation: 5,
+                minimumSize: (const Size(150, 50)),
+                enableFeedback: true,
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () => {
+                if (vController.text.isNotEmpty &&
+                    nController.text.isNotEmpty &&
+                    isChecked)
+                  {
+                    Guest.fromParams(vController.text, nController.text,
+                            guestEmail, guestLocation, DateTime.now())
+                        .addToDB(),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const EntryScreen())),
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.entered_data))),
+                  }
+                else if (isChecked == false)
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.terms_check))),
+                  }
+                else
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.invalid_data))),
+                  }
+              },
+              child: Text(
+                AppLocalizations.of(context)!.register,
+                style: const TextStyle(
+                    fontFamily: 'Roboto', fontStyle: FontStyle.italic),
+              ),
+            ))
+      ],
+    );
   }
 }

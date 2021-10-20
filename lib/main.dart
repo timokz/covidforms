@@ -69,7 +69,7 @@ class _AppState extends State<App> {
       return const Text("No Connection established");
     }
     //TODO AppCheck
-    //  FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E');
+      //FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: '6LfmSaQcAAAAAIONnq9PoTTXA4DJ9T9z_Dpsbi4E');
     return MaterialApp(
         title: 'tqwcovidreg',
         theme: ThemeData(

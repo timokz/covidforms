@@ -17,6 +17,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+//TODO QUERY SCREENSIZE AND ALLOCATE PERCENTAGE
+
 class _HomeScreenState extends State<HomeScreen> {
   bool langEn = true;
 
@@ -27,53 +29,55 @@ class _HomeScreenState extends State<HomeScreen> {
         ? await launch(_url)
         : throw 'Could not connect to $_url';
     return Scaffold(
-        backgroundColor: const Color(0xffffffff),
-        appBar: AppBar(
-          title: TextButton(
-              style: const ButtonStyle(),
-              onPressed: _launchURL,
-              child: Text(
-                AppLocalizations.of(context)!.home_title,
-                //  Text("TQW Covid Form",
-                style: const TextStyle(
-                  decorationColor: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Roboto",
-                  //    fontStyle: FontStyle.italic,
-                ),
-              )),
-          backgroundColor: Colors.black,
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {
-                String lang = "";
-                if (langEn) {
-                  lang = 'de';
-                  langEn = false;
-                } else {
-                  lang = 'en';
-                  langEn = true;
-                }
-                Locale newLocale = Locale(lang, '');
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xffffffff),
+      appBar: AppBar(
+        title: TextButton(
+            style: const ButtonStyle(),
+            onPressed: _launchURL,
+            child: Text(
+              AppLocalizations.of(context)!.home_title,
+              //  Text("TQW Covid Form",
+              style: const TextStyle(
+                decorationColor: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Roboto",
+                //    fontStyle: FontStyle.italic,
+              ),
+            )),
+        backgroundColor: Colors.black,
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              String lang = "";
+              if (langEn) {
+                lang = 'de';
+                langEn = false;
+              } else {
+                lang = 'en';
+                langEn = true;
+              }
+              Locale newLocale = Locale(lang, '');
 
-                App.setLocale(context, newLocale);
-              },
-              icon: const Icon(Icons.g_translate),
-            ),
-            IconButton(
-                icon: const Icon(Icons.settings),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const GetGuestData()));
-                })
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(64.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+              App.setLocale(context, newLocale);
+            },
+            icon: const Icon(Icons.g_translate),
+          ),
+          IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GetGuestData()));
+              })
+        ],
+      ),
+      body: Padding(
+          padding: const EdgeInsets.all(32.0),
+    //      padding: const EdgeInsets.fromLTRB(32.0,32.0,32.0,0),
+          child: ListView(
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
                   child: GestureDetector(
@@ -82,11 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: const Image(
                         image: AssetImage('graphics/tqwlogo.jfif'),
                       ))),
-              const Expanded(child: Center(child: FaB())),
-              const Center(
-                child:
-                    Align(alignment: Alignment.bottomCenter, child: Imprint()),
+              const Center(child: FaB()),
+              const SizedBox(
+                height: 20,
               ),
+              const Imprint(),
               Center(
                 child: TextButton(
                     onPressed: () {
@@ -101,8 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
               //imprint
               //    Center(child:),
             ],
-          ),
-        ) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+          )),
+      // This trailing comma makes auto-formatting nicer for build methods.
+    );
   }
 }

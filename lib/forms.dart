@@ -9,7 +9,6 @@ import 'location_dropdown.dart';
 import 'guest.dart';
 import 'email_form.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'gdrp_checkbox.dart';
 
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
@@ -126,6 +125,12 @@ class _NameFormState extends State<NameForm> {
                 hintText: "+43 660 1418155",
                 prefixIcon: const Icon(Icons.phone)),
             keyboardType: TextInputType.phone,
+            onEditingComplete: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
             validator: (String? value) {
               String sanitizedVal = value!.trim();
               if (sanitizedVal.isEmpty) {
@@ -141,7 +146,6 @@ class _NameFormState extends State<NameForm> {
         ),
         FormField<bool>(
           builder: (state) {
-            print(MediaQuery.of(context).size.width);
             return Row(
               children: <Widget>[
                 Checkbox(

@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'guest.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datagrid_export/export.dart';
-import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 class GuestDataSource extends DataGridSource {
   GuestDataSource({required List<Guest> guests}) {
@@ -13,7 +11,8 @@ class GuestDataSource extends DataGridSource {
               DataGridCell<String>(columnName: 'name', value: e.vName),
               DataGridCell<String>(columnName: 'location', value: e.location),
               DataGridCell<String>(
-                  columnName: 'Entry Time', value: DateFormat('yyyy-MM-dd – kk:mm').format(e.entryTime)),
+                  columnName: 'Entry Time',
+                  value: DateFormat('yyyy-MM-dd – kk:mm').format(e.entryTime)),
             ]))
         .toList();
   }

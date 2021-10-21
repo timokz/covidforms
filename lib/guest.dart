@@ -35,7 +35,7 @@ class Guest {
   late final DateTime entryTime;
 
   final CollectionReference guests =
-      FirebaseFirestore.instance.collection('guests_testing');
+      FirebaseFirestore.instance.collection('guests');
 
   void addToDB() {
     guests

@@ -1,5 +1,5 @@
 {
-  "home_title": "TQW Covid Formular",
+  "home_title": "TQW Contact Tracing",
   "telephone": "Telefon - Nr. ",
   "firstName": "Vorname",
   "lastName" : "Nachname",
@@ -16,5 +16,8 @@
   "h_url" : "https://tqw.at/hausordnung/",
   "entered_data" : "Verarbeitung der Daten",
   "invalid_data" : "Bitte geben Sie gültige Daten ein",
-  "terms_check" : "Bitte bestätigen Sie die Hausordnung und DSGVO"
+  "terms_check" : "Bitte bestätigen Sie die Hausordnung und DSGVO",
+  "phone_check" : "Bitte geben Sie eine gültige Nummer ein",
+  "email_check" : "Bitte geben Sie eine gültige Email ein",
+  "name_check" : "Bitte geben sie Ihren Namen ein"
 }

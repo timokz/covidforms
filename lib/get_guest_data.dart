@@ -25,7 +25,7 @@ class _GetGuestDataState extends State<GetGuestData> {
   @override
   Widget build(BuildContext context) {
     final guestRef = FirebaseFirestore.instance
-        .collection('guests_testing')
+        .collection('guests')
         .withConverter<Guest>(
           fromFirestore: (snapshots, _) => Guest.fromJson(snapshots.data()!),
           toFirestore: (guest, _) => guest.toJson(),
@@ -37,7 +37,7 @@ class _GetGuestDataState extends State<GetGuestData> {
           .toUtc()
           .millisecondsSinceEpoch;
       FirebaseFirestore.instance
-          .collection('guests_testing')
+          .collection('guests')
           .where('entryTime', isGreaterThanOrEqualTo: cutoff)
           .get()
           .then((QuerySnapshot query) {

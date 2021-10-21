@@ -9,6 +9,7 @@ import 'location_dropdown.dart';
 import 'guest.dart';
 import 'email_form.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
@@ -63,9 +64,10 @@ class _NameFormState extends State<NameForm> {
   final nController = TextEditingController();
   final pController = TextEditingController();
   bool isChecked = false;
+  String initialCountry = 'AT';
+  PhoneNumber number = PhoneNumber(isoCode: 'AT');
 
-  CollectionReference guests =
-      FirebaseFirestore.instance.collection('guests_testing');
+  CollectionReference guests = FirebaseFirestore.instance.collection('guests');
 
   @override
   void dispose() {
@@ -86,7 +88,7 @@ class _NameFormState extends State<NameForm> {
             fontFamily: 'Arial',
           ),
           decoration: InputDecoration(
-            hintText: AppLocalizations.of(context)!.firstName,
+            labelText: AppLocalizations.of(context)!.firstName,
             prefixIcon: const Icon(Icons.person),
           ),
           controller: vController,
@@ -96,7 +98,7 @@ class _NameFormState extends State<NameForm> {
         ),
         TextField(
           decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.lastName,
+              labelText: AppLocalizations.of(context)!.lastName,
               prefixIcon: const Icon(Icons.person)),
           controller: nController,
         ),
@@ -122,21 +124,26 @@ class _NameFormState extends State<NameForm> {
         TextFormField(
             decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.telephone,
-                hintText: "+43 660 1418155",
                 prefixIcon: const Icon(Icons.phone)),
             keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.done,
+            controller: pController,
+            inputFormatters: [FilteringTextInputFormatter.deny(RegExp("[.]"))],
             onEditingComplete: () {
               FocusScopeNode currentFocus = FocusScope.of(context);
               if (!currentFocus.hasPrimaryFocus) {
                 currentFocus.unfocus();
               }
             },
-            validator: (String? value) {
-              String sanitizedVal = value!.trim();
-              if (sanitizedVal.isEmpty) {
-                return 'Value required';
+            validator: (value) {
+              if (value!.isEmpty ||
+                  !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
+                      .hasMatch(value)) {
+                //  r'^[0-9]{10}$' pattern plain match number with length 10
+                return AppLocalizations.of(context)!.phone_check;
+              } else {
+                return null;
               }
-              return null;
             },
             onChanged: (String str) {
               setState(() {});
@@ -194,7 +201,22 @@ class _NameFormState extends State<NameForm> {
                 ),
               ),
               onPressed: () => {
-                if (vController.text.isNotEmpty &&
+                if (vController.text.isEmpty || nController.text.isEmpty)
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.name_check))),
+                  }
+                else if ((guestEmail.isEmpty ||
+                        guestEmail.toString().length < 4) ||
+                    !guestEmail.toString().contains("@") ||
+                    !guestEmail.toString().contains("."))
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.email_check))),
+                  }
+                else if (vController.text.isNotEmpty &&
                     nController.text.isNotEmpty &&
                     isChecked)
                   {

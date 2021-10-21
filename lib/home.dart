@@ -63,14 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             icon: const Icon(Icons.g_translate),
           ),
-          IconButton(
+     /*    IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const GetGuestData()));
-              })
+              }) */
         ],
       ),
       body: Padding(

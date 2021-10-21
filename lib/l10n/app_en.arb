@@ -16,5 +16,9 @@
   "h_url" : "https://tqw.at/en/house-rules/",
   "entered_data" : "Processing Data",
   "invalid_data" : "Please enter valid Data",
-  "terms_check" : "Please confirm the House Rules and GDPR"
+  "terms_check" : "Please confirm the House Rules and GDPR",
+  "phone_check" : "Please enter a valid Phone-Nr.",
+  "email_check" : "Please enter a valid Email",
+  "name_check" : "Please enter your name"
+
 }

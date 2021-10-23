@@ -26,11 +26,11 @@ class _LocationDropdownState extends State<LocationDropdown> {
       ),
       items: <String>[
         'Halle G (Party)',
-  //      'Studio 1',
-   //     'Studio 2',
-    //    'Studio 3',
-    //    AppLocalizations.of(context)!.biblio,
-     //   AppLocalizations.of(context)!.office,
+        //      'Studio 1',
+        //     'Studio 2',
+        //    'Studio 3',
+        //    AppLocalizations.of(context)!.biblio,
+        //   AppLocalizations.of(context)!.office,
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

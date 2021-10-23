@@ -17,7 +17,7 @@ class _PrivacyState extends State<Privacy> {
     void _launchURL() async => await canLaunch(_url)
         ? await launch(_url)
         : throw 'Could not connect to $_url';
-
+    
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.black,

@@ -216,12 +216,24 @@ class _NameFormState extends State<NameForm> {
                         content:
                             Text(AppLocalizations.of(context)!.email_check))),
                   }
+                else if (pController.text.isEmpty ||
+                    pController.text.length < 8)
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.phone_check))),
+                  }
                 else if (vController.text.isNotEmpty &&
                     nController.text.isNotEmpty &&
                     isChecked)
                   {
-                    Guest.fromParams(vController.text, nController.text,
-                            guestEmail, guestLocation, DateTime.now())
+                    Guest.fromParams(
+                            vController.text,
+                            nController.text,
+                            guestEmail,
+                            guestLocation,
+                            DateTime.now(),
+                            pController.text)
                         .addToDB(),
                     Navigator.push(
                         context,

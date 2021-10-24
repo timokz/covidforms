@@ -17,8 +17,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-//TODO QUERY SCREENSIZE AND ALLOCATE PERCENTAGE
-
 class _HomeScreenState extends State<HomeScreen> {
   bool langEn = true;
 

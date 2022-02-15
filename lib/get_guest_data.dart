@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidreg/home.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'guest.dart';
 import 'guest_data_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -11,6 +12,10 @@ import 'dart:convert';
 import 'dart:html';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart'
     hide Alignment, Column, Row;
+
+var logger = Logger(
+  printer: PrettyPrinter(),
+);
 
 class GetGuestData extends StatefulWidget {
   const GetGuestData({Key? key}) : super(key: key);
@@ -44,7 +49,7 @@ class _GetGuestDataState extends State<GetGuestData> {
         for (DocumentSnapshot doc in query.docs) {
           Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
           DateTime dt = (map['entryTime'] ??= Timestamp.now()).toDate();
-          print(dt.toString());
+          logger.i(dt.toString());
         }
       });
     }
@@ -80,7 +85,7 @@ class _GetGuestDataState extends State<GetGuestData> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          print("Guest Data Time Check: ");
+          logger.i("Guest Data Time Check: ");
           guestDataTimeCheck();
           final data = snapshot.requireData;
 

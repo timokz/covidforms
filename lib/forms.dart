@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 import 'entry_screen.dart';
 import 'location_dropdown.dart';
 import 'guest.dart';
@@ -11,6 +11,9 @@ import 'email_form.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
+var logger = Logger(
+  printer: PrettyPrinter(),
+);
 class FaB extends StatefulWidget {
   const FaB({Key? key}) : super(key: key);
 
@@ -36,7 +39,7 @@ class _FaBState extends State<FaB> {
         Uri.parse(url),
         body: json.encode({"title": title}),
       );
-      print(response);
+      logger.i(response);
     } catch (error) {
       rethrow;
     }

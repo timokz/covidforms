@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:phone_number/phone_number.dart';
+import 'package:logger/logger.dart';
 
+var logger = Logger(
+  printer: PrettyPrinter(),
+);
 @immutable
 class Guest {
   Guest(
@@ -51,8 +54,8 @@ class Guest {
           'entryTime': entryTime,
           'phone': phone,
         })
-        .then((value) => print("Guest Added"))
-        .catchError((error) => print("Failed to add Guest: $error"));
+        .then((value) => logger.i("Guest Added"))
+        .catchError((error) => logger.e("Failed to add Guest: $error"));
   }
 
   Map<String, Object?> toJson() {

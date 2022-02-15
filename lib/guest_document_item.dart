@@ -9,10 +9,6 @@ class GuestItem extends StatelessWidget {
   final DocumentReference<Guest> reference;
   final Guest guest;
 
-  void nullCheck() {
-    print("not null yet");
-  }
-
   @override
   Widget build(BuildContext context) {
     String formattedDate =

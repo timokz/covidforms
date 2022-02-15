@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,7 +16,7 @@ class _PrivacyState extends State<Privacy> {
     void _launchURL() async => await canLaunch(_url)
         ? await launch(_url)
         : throw 'Could not connect to $_url';
-    
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.black,

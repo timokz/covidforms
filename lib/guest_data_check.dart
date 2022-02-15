@@ -1,4 +1,10 @@
+import 'package:logger/logger.dart';
+
 import 'guest.dart';
+
+var logger = Logger(
+  printer: PrettyPrinter(),
+);
 
 class GuestCheck {
   static String location = "Studio 1";
@@ -7,9 +13,9 @@ class GuestCheck {
 
   void addGuestChecks() {
     List<Guest> guestCheckList = List.empty(growable: true);
-  int duration = 28;
+    int duration = 28;
     for (int x = 0; x < 55; ++x) {
-      print("Position in check queue: " + x.toString());
+      logger.i("Position in check queue: " + x.toString());
       var date = DateTime.now().subtract(Duration(days: duration++));
       guestCheckList.add(Guest.fromParams(vName.toString(), nName.toString(),
           "email@test.com", location, date, "number"));

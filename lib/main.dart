@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:logger/logger.dart';
 import 'home.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+var logger = Logger(
+  printer: PrettyPrinter(),
+);
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
@@ -31,8 +33,7 @@ class _AppState extends State<App> {
 
   Future<void> initializeDefault() async {
     FirebaseApp app = await Firebase.initializeApp();
-    assert(app != null);
-    print('Initialized default app $app');
+    logger.i('Initialized default app $app');
   }
 
   changeLanguage(Locale locale) {
@@ -65,7 +66,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     if (_error) {
-      print("error establishing connection");
+      logger.e("error establishing connection");
       return const Text("No Connection established");
     }
     //TODO AppCheck
@@ -99,56 +100,3 @@ class _AppState extends State<App> {
         home: const HomeScreen());
   }
 }
-//TODO replace web/icons
-/*
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(TQW());
-}
-
-class TQW extends StatelessWidget{
-    TQW({Key? key}) : super(key: key);
-
-    final Future<FirebaseApp> _initFB =  Firebase.initializeApp();
-
-    @override
-  Widget build(BuildContext context) {
-      print("in builder");
-    return FutureBuilder(
-      future: _initFB,
-      builder: (context, snapshot) {
-         FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: 'T3q2w1Wien');
-
-        if (snapshot.hasError) {
-          print("made it to snapshot error ");
-
-          return const SnackBar(content: Text("Database Connection failed to establish. Please try again."));
-        }
-// Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          print("made it to pos connection ");
-
-          return const HomeScreen();/*MaterialApp(
-              localizationsDelegates:  const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en', ''), // English, no country code
-                Locale('de', ''), // German, no country code
-              ],
-              theme: ThemeData(
-                  primaryColor: Colors.amber
-              ),
-              home: const HomeScreen()
-          ); */
-        }
-// Otherwise, show something whilst waiting for initialization to complete
-        return const CircularProgressIndicator(backgroundColor: Color(0x0000000c), value: 12,);
-      },
-    );
-  }
-}
-*/

@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'forms.dart';
-import 'get_guest_data.dart';
 import 'imprint.dart';
 import 'main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'privacy_page.dart';
-import 'guest_data_check.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -61,14 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             icon: const Icon(Icons.g_translate),
           ),
-     /*    IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const GetGuestData()));
-              }) */
         ],
       ),
       body: Padding(
